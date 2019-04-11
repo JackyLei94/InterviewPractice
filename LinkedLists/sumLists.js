@@ -1,22 +1,23 @@
-const sumLists = (list1, list2) => {
-  // list1 and list2 may not be the same length
-  let currList1 = list1.head.next;
-  let currList2 = list2.head.next;
-  const startSum = list1.head.data + list2.head.data;
-  let digit = startSum % 10;
-  let carryOver = startSum > 10 ? 1 : 0;
-  let sumList = new LinkedList(digit);
+const safetyCheck = function(node) {
+  return node ? node.data : 0;
+}
 
-  
-  while (currList1 || currList2) {
-    let sum = carryOver + currList1.data + currList2.data;
-    digit = sum % 10;
-    sumList.addToTail(digit);
-    
-    carryOver = sum >= 10 ? 1 : 0; 
-    currList1 = currList1.data ? currList1.next : currList1;
-    currList2 = currList2.data ? currList2.next : currList2;
+const sumLists = (list1, list2) => {
+  const initialSum = list1.head.data + list2.head.data;
+  let carryOver = initialSum >= 10 ? 1 : 0;
+  let sumList = new LinkedList(initialSum % 10);
+  let currNode1 = list1.head ? list1.head.next : null;
+  let currNode2 = list2.head ? list2.head.next : null;
+
+  while (currNode1 || currNode2) {
+    let sum = carryOver + safetyCheck(currNode1) + safetyCheck(currNode2);
+    sumList.addToTail(sum % 10);
+    carryOver = sum >= 10 ? 1 : 0;
+    currNode1 = currNode1 ? currNode1.next: null;
+    currNode2 = currNode2 ? currNode2.next : null;
   }
+
+  if (carryOver) sumList.addToTail(carryOver);
 
   return sumList.head;
 };
