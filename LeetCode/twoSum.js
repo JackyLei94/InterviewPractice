@@ -10,3 +10,27 @@ let twoSum = function(nums, target) {
       hashTable[diff] = i;
   }
 };
+
+// Method 2: Two Pointers
+// Time: O(nlog(n)), Space: O(1)
+// ** Space will only be constant if not returning original indices, the values, or a boolean
+let twoSum = function(nums, target) {
+  nums.sort();
+
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left !== right) {
+    if (nums[left] + nums[right] === target) {
+      return [left, right];
+    } 
+
+    if (nums[left] + nums[right] > target) {
+      right--;
+    }
+    
+    if (nums[left] + nums[right] < target) {
+      left++;
+    }
+  }
+}
