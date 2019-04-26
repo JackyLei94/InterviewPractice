@@ -1,18 +1,14 @@
 var subsets = function(nums) {
-  let powerSet = [[]];
-  const getSubsets = (index, array = []) => {
-      if (index === nums.length) {
+  let powerSet = [];
+  const getSubsets = (start = 0, array = []) => {
+      if (start === nums.length + 1) {
           return;
       }
       powerSet.push(array);
-      for (let i = index; i < nums.length; i++) {
+      for (let i = start; i < nums.length; i++) {
           getSubsets(i + 1, array.concat(nums[i]));
       }
   }
-  for (let i = 0; i < nums.length; i++) {
-      getSubsets(i);
-  }
+  getSubsets();
   return powerSet;
 };
-
-console.log(subsets([1,2,3]));
