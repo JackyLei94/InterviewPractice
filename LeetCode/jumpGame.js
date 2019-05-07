@@ -1,3 +1,12 @@
+// DP Method
+var canJump = function(nums) {
+  let reach = 0;
+  for (let i = 0; i <= reach && i < nums.length - 1; i++) {
+    reach = Math.max(i + nums[i], reach);
+  }
+  return reach >= nums.length - 1;
+};
+
 // Greedy Method
 var canJump = function(nums) {
   let last = nums.length - 1;
