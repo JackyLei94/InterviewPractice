@@ -1,4 +1,5 @@
-var isSymmetric = function(root) {
+// BFS
+const isSymmetric = function(root) {
   let forwardQ = [root];
   let reverseQ = [root];
   
