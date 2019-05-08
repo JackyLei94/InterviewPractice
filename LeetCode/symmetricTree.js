@@ -1,3 +1,23 @@
+// DFS
+const isSymmetric = root => {
+  if (!root) {
+    return true;
+  }
+  return helper(root.left, root.right);
+}
+
+const helper = (left, right) => {
+  if (!left && !right) {
+    return true;
+  }
+  if (!left || !right) {
+    return false;
+  }
+  return left.val === right.val &&
+    helper(left.right, right.left) &&
+    helper(left.left, right.right);
+}
+
 // BFS
 const isSymmetric = function(root) {
   let forwardQ = [root];
