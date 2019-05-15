@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Konami Code</title>
+</head>
+<body>
+  <script>
+    const queue = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown','ArrowDown',
+      'ArrowLeft','ArrowRight',
+      'ArrowLeft','ArrowRight',
+      'b','a',
+      'Enter'
+    ];
+    let pointer = 0;
+
+    const trackKeystrokes = (event) => {
+      if (event.key === queue[pointer]) {
+        pointer++;
+      } else {
+        pointer = 0;
+      }
+
+      if (pointer === 11) {
+        alert('you got it!');
+      }
+    };
+
+    document.onkeydown = trackKeystrokes;
+    // Konami Code:
+    //   Write a function on a webpage that alerts a message when a user types
+    //   in the Konami code into this webpage
+    //   The Code:  Up, Up, Down, Down, Left, Right, Left, Right, B, A, Enter
+
+  </script>
+</body>
+</html>
