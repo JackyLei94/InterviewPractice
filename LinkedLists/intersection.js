@@ -1,3 +1,18 @@
+const shiftLists = (list1, list2, length1, length2) => {
+  // returns adjusted nodes
+  const diff = Math.abs(length1 - length2);
+  if (diff === 0) {
+    return [list1, list2];
+  }
+  let [longer, shorter] = (length1 >= length2) ? [list1.head, list2.head] : [list2.head, list1.head];
+  while (diff > 0) {
+    longer = longer.next;
+    diff--;
+  }
+
+  return [longer, shorter];
+}
+
 const intersection = (list1, list2) => {
   // Get length and tail of both lists
   // If either length === 0 or the tails aren't the same
@@ -27,5 +42,16 @@ const intersection = (list1, list2) => {
 
   if (!length1 || !length2 || tail1 !== tail2) {
     return;
+  }
+
+  [curr1, curr2] = shiftLists(list1, list2);
+
+  while (curr1.next) {
+    if (curr1 === curr2) {
+      return curr1;
+    }
+
+    curr1 = curr1.next;
+    curr2 = curr2.next;
   }
 }
