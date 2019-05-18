@@ -10,3 +10,17 @@ const reverseList = head => {
   }
   return prev;
 };
+
+// Recursive solution
+const reverseList = head => {
+  return helper(head);
+}
+
+const helper = (node, prev = null) => {
+  if (node === null) {
+    return null;
+  }
+  let temp = node.next;
+  node.next = prev;
+  return temp === null ? node : helper(temp, node);
+}
