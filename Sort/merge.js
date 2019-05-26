@@ -28,3 +28,8 @@ const mergeSort = arr => {
   // Mergesort
   return divide(arr, 0, arr.length - 1);
 };
+
+// Time Complexity:
+// Best: nlog(n)
+// Average: nlog(n)
+// Worst: nlog(n)
