@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Debounce</title>
+  </head>
+  <body>
+    <textarea id="textArea">
+    </textarea>
+    <textarea id="mirror" disabled=true>
+      
+    </textarea>
+    <script>
+      const textArea = document.getElementById('textArea');
+      const mirror = document.getElementById('mirror');
+      
+      const debounce = (fn, delay) => {
+        let timer;
+        return function () {
+          const context = this;
+          const args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => fn.apply(context, args), delay);
+        }
+      };
+      
+      const mirrorText = event => {
+        mirror.innerText = event.target.value;
+      };
+      textArea.onkeyup = debounce(mirrorText, 500);
+    </script>
+  </body>
+</html>
+
+<!--
+  *debounce-question*
+This question was one of the questions that I got in my first onsite. You don't need any frameworks or libraries for this.
+
+Parts
+Create two textareas so that when you type in one the text is mirrored in the other.
+Think about if every time you typed in the textarea you sent a request to a server. What would be the issue with this? How could you make it so that the request is only sent if the user has not been typing for a period of time? Hint: it's literally in the title of this repo.
+Implement this method from scratch and don't look at the library code.
+Make it so that when you type in one textbox it only populates the other textarea if the user hasn't typed for 500 milliseconds.
+-->
