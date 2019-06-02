@@ -1,28 +1,27 @@
-const partitionLabels = S => {
+var partitionLabels = function(S) {
   let output = [];
+  let seen = {};
   let start = 0;
-  let last = getLastIdx(S, start);
-  while (last < S.length) {
-    for (let i = start; i < last; i++) {
-      let idx = getLastIdx(S, i);
-      if (idx > last) {
-        last = idx;
-      }
+  let last = 0;
+
+  for (let i = 0; i <= S.length; i++) {
+    if (i > last) {
+      output.push(last - start + 1);
+      start = i;
+    } 
+
+    let char = S[i];
+    if (!seen.hasOwnProperty(char)) {
+      last = Math.max(last, getLastIdx(S, char));
+      seen[char] = last;
     }
-    output.push(last + 1 - start);
-    start = last + 1;
-    last = getLastIdx(S, start);
   }
+
   return output;
 };
 
-const getLastIdx = (arr, start) => {
-  let char = arr[start];
-  let lastIdx;
-  for (let i = start; i < arr.length; i++) {
-    if (arr[i] === char) {
-      lastIdx = i;
-    }
+const getLastIdx = (arr, char) => {
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i] === char) return i;
   }
-  return lastIdx;
 };
