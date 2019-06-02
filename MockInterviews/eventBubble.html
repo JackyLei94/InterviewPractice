@@ -32,5 +32,15 @@
       <input type="radio" name="Your status is" value="domestic partner">domestic partner<br>
     </p>
   </form>
+
+  <script>
+    const form = document.getElementById('gov-form');
+    const alertUser = event => {
+      if (event.target.getAttribute('type') === 'radio') {
+        alert('Please check your answer with your W-2 form');
+      }
+    }
+    form.onclick = alertUser;
+  </script>
 </body>
 </html>
