@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="button">Click me!</button>
+  <script>
+    const button = document.getElementById('button');
+    const throttle = (fn, delay) => {
+      let ready = true;
+      return (...args) => {
+        if (ready) {
+          ready = false;
+          const context = this;
+          fn.apply(context, args);
+          setTimeout(() => ready = true, delay);
+        };
+      };
+    };
+    const alertUser = () => {
+      alert('Button was clicked');
+    };
+    button.onclick = throttle(alertUser, 2000);
+  </script>
+</body>
+</html>
