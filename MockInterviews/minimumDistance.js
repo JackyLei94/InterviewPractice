@@ -1,5 +1,18 @@
+// Depth First Search
 const minimumDistance = (area, numRows, numColumns) => {
-
+  let min = Infinity;
+  const traverse = (grid, row, col, dist) => {
+    if (row < 0 || col < 0 || row >= numRows || col >= numColumns || grid[row][col] === 0) return;
+    if (grid[row][col] === 9) return min = Math.min(min, dist);
+    grid[row][col] = 0;
+    traverse(grid, row + 1, col, dist + 1);
+    traverse(grid, row - 1, col, dist + 1);
+    traverse(grid, row, col + 1, dist + 1);
+    traverse(grid, row, col - 1, dist + 1);
+    grid[row][col] = 1;
+  };
+  traverse(area, 0, 0, 0);
+  return min === Infinity ? -1 : min;
 };
 
 // Tests
